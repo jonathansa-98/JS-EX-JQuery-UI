@@ -2,6 +2,7 @@ $(document).ready(function () {
     crearEx1();
     crearEx2();
     crearEx3();
+    crearEx4();
 });
 
 function crearEx1() {
@@ -63,5 +64,28 @@ function revertPromo(fin_promo) {
     // replace btn
     fin_promo.prev(".promo").show();
     fin_promo.remove();
+}
 
+function crearEx4() {
+    $(".mesinfo").each(function () {
+        var desc = $(this).closest('.panel-body').find('.desc');
+        //console.log(desc);
+        desc.slideToggle();
+    });
+    $('.mesinfo').click(function (event) {
+        event.preventDefault();
+        toogleInfo($(this));
+    });
+}
+
+function toogleInfo(mesinfo) {
+    var desc = mesinfo.closest('.panel-body').find('.desc');
+    if (desc.css("display")=="none") {
+        //mesinfo.find("span").addClass('glyphicon-minus').removeClass('glyphicon-plus');
+        mesinfo.find("span").switchClass("glyphicon-plus", "glyphicon-minus");
+    } else {
+        //mesinfo.find("span").addClass('glyphicon-plus').removeClass('glyphicon-minus');
+        mesinfo.find("span").switchClass("glyphicon-minus", "glyphicon-plus");
+    }
+    desc.slideToggle();
 }
