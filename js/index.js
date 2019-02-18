@@ -36,41 +36,32 @@ function calcPromo(promo) {
     // poner precio con dte
     preu.after(`<p class="preu_dte">Promoció ${dte_viatge}%: ${preu_final}€ per setmana</p>`);
     // cambiar boton
-    var fin_promo = $('<a href="#" class="promo_fin btn btn-info btn-sm"><span class="glyphicon glyphicon-erase"'+
+    var fin_promo = $('<a href="#" class="fin-promo btn btn-info btn-sm"><span class="glyphicon glyphicon-erase"'+
                         'aria-hidden="true"></span> Finalitzar promoció</a>');
-    promo.replaceWith(fin_promo);
+    //promo.replaceWith(fin_promo);
+    promo.after(fin_promo);
+    promo.hide();
     console.log(preu_final);
 }
 
 function crearEx3() {
-    /*console.log("hias");
-
-    if ($(".panel-body").hasClass(".promo_fin")){
-        $(".promo_fin").click(function (event) {
-            console.log("hi");
-
-            event.preventDefault();
-            revertPromo($(this));
-        });
-    }*/
+    $('body').on('click', '.fin-promo', function (event) {
+        console.log("hi");
+        event.preventDefault();
+        revertPromo($(this));
+    });
 }
 
-function revertPromo(promo) {
-    // selecciona el texto del precio
-  //  var preu = promo.closest('div').prev('.preu');
-//    preu.css("color", "#4775f5a6");
-    // viatge
-    /*var viatge = preu.closest('.viatge');
-    viatge.addClass("promocio");
-    // calc descuento
-    var preu_viatge = parseInt(viatge.attr("data-preu"));
-    var dte_viatge = parseInt(viatge.attr("data-dte"));
-    var preu_final = Math.ceil(preu_viatge - (preu_viatge * (dte_viatge / 100)));
-    // poner precio con dte
-    preu.after(`<p class="preu_dte">Promoció ${dte_viatge}%: ${preu_final}€ per setmana</p>`);
-    // cambiar boton
-    var fin_promo = $('<a href="#" class="promo btn btn-info btn-sm"><span class="glyphicon glyphicon-erase"' +
-        'aria-hidden="true"></span> Finalitzar promoció</a>');
-    promo.replaceWith(fin_promo);
-    console.log(preu_final);*/
+function revertPromo(fin_promo) {
+    // borrar texto del precio
+    var preu_dte = fin_promo.closest('div').prev('.preu_dte');
+    preu_dte.remove();
+    // quita classe promocio
+    var preu = fin_promo.closest('div').prev('.preu');
+    var viatge = preu.closest('.viatge');
+    viatge.removeClass("promocio");
+    // replace btn
+    fin_promo.prev(".promo").show();
+    fin_promo.remove();
+
 }
