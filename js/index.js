@@ -3,6 +3,8 @@ $(document).ready(function () {
     crearEx2();
     crearEx3();
     crearEx4();
+    crearEx5();
+    //crearEx6();
 });
 
 function crearEx1() {
@@ -42,12 +44,10 @@ function calcPromo(promo) {
     //promo.replaceWith(fin_promo);
     promo.after(fin_promo);
     promo.hide();
-    console.log(preu_final);
 }
 
 function crearEx3() {
     $('body').on('click', '.fin-promo', function (event) {
-        console.log("hi");
         event.preventDefault();
         revertPromo($(this));
     });
@@ -69,7 +69,6 @@ function revertPromo(fin_promo) {
 function crearEx4() {
     $(".mesinfo").each(function () {
         var desc = $(this).closest('.panel-body').find('.desc');
-        //console.log(desc);
         desc.slideToggle();
     });
     $('.mesinfo').click(function (event) {
@@ -89,3 +88,29 @@ function toogleInfo(mesinfo) {
     }
     desc.slideToggle();
 }
+
+function crearEx5() {
+    $('.eliminar').click(function (event) {
+        event.preventDefault();
+        eliminarViatge($(this));
+    });
+}
+
+function eliminarViatge(eliminar) {
+    console.log("hi");
+    var viatge = eliminar.closest('.viatge');
+    viatge.slideUp(500, function () {
+        $(this).remove();
+    });
+}
+/*
+function crearEx6() {
+    $('.reservar').click(function (event) {
+        event.preventDefault();
+        reservaViatge($(this));
+    });
+}
+
+function reservaViatge(reserva) {
+    console.log("hi");
+}*/
