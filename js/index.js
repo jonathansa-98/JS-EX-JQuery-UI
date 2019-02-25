@@ -4,7 +4,7 @@ $(document).ready(function () {
     crearEx3();
     crearEx4();
     crearEx5();
-    //crearEx6();
+    crearEx6();
 });
 
 function crearEx1() {
@@ -103,14 +103,44 @@ function eliminarViatge(eliminar) {
         $(this).remove();
     });
 }
-/*
+
+// Contar los viajes que cuestan menos del maximo
+// que introduzca el usuario en el slider.
 function crearEx6() {
-    $('.reservar').click(function (event) {
-        event.preventDefault();
-        reservaViatge($(this));
-    });
+    sliderViatge();
+    filtrarViatge();
 }
 
-function reservaViatge(reserva) {
-    console.log("hi");
-}*/
+function sliderViatge() {
+    $("#slider-range-min").slider({
+        range: "min",
+        step: 50,
+        value: 1600,
+        min: 50,
+        max: 2000,
+        slide: function (event, ui) {
+            $("#amount").val("$" + ui.value);
+            filtrarViatge();
+        }
+    });
+    $("#amount").val("$" + $("#slider-range-min").slider("value"));
+}
+
+function filtrarViatge() {
+    var viatges = $(".viatge");
+    var preus = [];
+    var cont = 0;
+    var maximo = $("#slider-range-min").slider("option", "value");
+    viatges.each(function () {
+        preus.push(parseInt($(this).attr("data-preu")));
+    });
+    //console.log(preus);
+    //console.log(maximo);
+    //console.log(viatges.attr("class"));
+    //console.log(viatges[0].attr("data-preu"));
+    for (let i = 0; i < preus.length; i++) {
+        if(preus[i] < maximo){
+            cont++;
+        }
+    }
+}
