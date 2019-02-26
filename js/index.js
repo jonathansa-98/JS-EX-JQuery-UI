@@ -115,7 +115,7 @@ function sliderViatge() {
     $("#slider-range-min").slider({
         range: "min",
         step: 50,
-        value: 1600,
+        value: 1500,
         min: 50,
         max: 2000,
         slide: function (event, ui) {
@@ -130,12 +130,13 @@ function filtrarViatge() {
     var viatges = $(".viatge");
     var preus = [];
     var cont = 0;
-    var maximo = $("#slider-range-min").slider("option", "value");
+    var maximo = $("#amount").val();
+    maximo = parseInt(maximo.substring(1, maximo.length));
     viatges.each(function () {
         preus.push(parseInt($(this).attr("data-preu")));
     });
     for (let i = 0; i < preus.length; i++) {
-        if(preus[i] < maximo){
+        if(preus[i] <= maximo){
             cont++;
         }
     }
