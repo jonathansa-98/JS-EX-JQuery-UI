@@ -134,13 +134,10 @@ function filtrarViatge() {
     viatges.each(function () {
         preus.push(parseInt($(this).attr("data-preu")));
     });
-    //console.log(preus);
-    //console.log(maximo);
-    //console.log(viatges.attr("class"));
-    //console.log(viatges[0].attr("data-preu"));
     for (let i = 0; i < preus.length; i++) {
         if(preus[i] < maximo){
             cont++;
         }
     }
+    $("#n_viatges").text(cont);
 }
